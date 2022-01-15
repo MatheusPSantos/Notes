@@ -62,3 +62,64 @@ In case of different nodes broadcast different versions of the next block simult
 The incentive can also be funded with transaction fees.
 
 ## Reclaiming Disk Space
+
+The last transaction in a coin is buried under enough block;
+
+The spent transactions before can be discarded to save disk space;
+
+Transactions are hashed in a Merkle Tree, with only the root included in the block's hash.
+
+## Simplified Payment Verification
+
+"It is possible to verify payments without running a full network node."
+
+"A user need to keep a copy of the block headers of the longest proof-of-work chain, which he can get by  querying network nodes until he's convinced he has the longest chain, and obtain the Merkle brnach linking the transaction to the block it's timestamped in."
+
+## Combining and Splitting Value
+
+"To allow value to be split and combined, transactions contain multiple inputs and outputs."
+
+"Normally ther will be either a single input from a large previous transaction or multiple input combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender".
+
+"There is never the neeed to extract a complete standalone copy of a transaction's history."
+
+
+## Privacy
+
+- Public key anonymous
+
+"The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone."
+
+> traditional Privacy Model
+```
++----------------+  +----------------+  +-------------------+   +-------------+  |  +--------+
+| Identities     |->|   Transactions |->|Trusted Third Party| ->| Counterparty|  |  | Public |
++----------------+  +----------------+  +-------------------+   +-------------+  |  +--------+
+
+```
+> New Privacy Model
+```
++----------------+ |  +----------------+  +---------+
+| Identities     | |  |   Transactions |->| public  |
++----------------+ |  +----------------+  +---------+
+
+```
+
+"As an additional firewall, a new key pay should be used for each transaction to keep them from being linked to a common owner."
+
+"The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner."
+
+## Conclusion
+
+Proposed system for eletronic transactions without relyin on trust. 
+
+Nodes work all at once with little coordination.
+
+They don't need to be identified, since messages are not routed to any particular place and only need to be delivered on a bes effort basis.
+
+Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone.
+
+Node vores with they CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them.
+
+Any needed rules and incentives can be enforced with this consensus mechanism.
+
