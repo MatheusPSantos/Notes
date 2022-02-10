@@ -93,3 +93,110 @@ Merge vs Rebase
 - Rebase pega os commits da main e aplica em cima da linha temporal da branch,
 como se eles tivessem sido feitos na branch
 
+## Testes automatizados
+
+Garantia de funcionamento do software.
+- Testes fazem parte da integração contínua.
+- Rodar antes do commit.
+- TDD pode ajudar, mas não essencial.
+- Desemepenho importa.
+
+Test Driven Development:
+  - Feedback dos testes no design.
+  - Código testável é código simples.
+  - Teste é sobre feedback contínuo.
+
+Testes automatizados:
+- Functional Tests: Testa o sistema completo e garente o funcionamento de uma funcionalidade na visão de um cliente.
+- Integration Tests: Teste módulos em conjunto como integração com bancos de dados.
+- Unit Test;
+
+O desempenho diminui inversamete proporcional à quantidade dos testes.
+
+Smoke test: seleção de testes que garantem que as funcionalidade mais importantes e sensíveis do sistema são testadas. São testes que a build só passa quando esses testes são passados.
+
+Resumindo:
+- caracterizar testes.
+- rodar testes rápidos primeiro.
+- use smoke testes.
+- testes fazem parte do build.
+- aplicar boas práticas de teste.
+- feedback -> diminuir o risco, se algo quebra, responder na hora.
+
+## Build automatizado
+
+Etapas do Build:
+
+    clean -> compile -> Unit Tests -> Static analysis -> Package software -> Integrate database -> [...]
+
+- build a cada commit
+- tudo automatizado / single command
+- build sem depender da IDE
+- tudo está no repositório
+
+Build rápido/Feeback rápido
+  - otimizar o build, métricas ajudam
+    - verificar a fase testes e analise do código
+    - verifique ordem dessas fases
+    - verifique a infra do build system
+    - use cache
+
+Resumindo:
+- Use ferramenta para automatizar o seu build.
+- Use commit-build
+- Builds rápidos que falham rápidos (10min)
+- Scripts único que construí para ambientes (parametrizado)
+  - comando único de buidl
+- use máquina de build
+
+## Servidor de integração contínuas
+Local que testa tudo: CI DAEMON
+- Realiza o build o tempo todo e avisa aos desenvolvedores o status do build e testes;
+- Publicar os relatórios de qualidade;
+- Se o build passou, ele oferece o artefato do build em um servidor.
+
+## Build quebrado
+
+O que fazer quando o build não está confiável, está quebrado?
+
+- "Nobody has a higher priority task than fixing the build." - Kent Beck
+
+- Não realizar commits até que o build seja corrigido.
+- É uma responsabilidade da equipe.
+
+## Certificação de CI
+1 - Você "commita" diariamente o seu código no "mainline" do projeto?
+
+2 - Build e testes rodam automatizados e trazem a confiança que o software está correto?
+
+3 - Quando um build quebra, a equipe conseta em +- 10 minutos?
+
+## O que é entrega contínua?
+Manifesto Ágil: "Working software over comprehensive documentation"
+
+"Our highest priority is to satisfy the customer through early and CONTINUOUS DELIVERY of valuable software."
+
+Release -> deploy.
+
+Como chegar?
+
+- RNF: deployability
+- Padrões:
+  - deployment pipeline
+  - deploys de baixo risco
+    - deploys incremental
+    - separar deploy e publicações
+    - deploys frequêntes
+    - otimizar para resiliência
+
+Entregar contínua vs Deploy contínua?
+
+Entrega contínua exige uma mudança de postura da empresa.
+
+## DevOps
+A tarefa do DevOps é derrubar os muros entre as equipes para que seja possível a entrega contínua, é um movimento cultural que visa a colaboração entre as equipes envolvidas no desenvolvimento e entrega de software, para melhorar a qualidade e velocidade do software.
+
+- É principalmente sobre o comportamento de pessoas
+- Otimização da dinâmica;
+
+Entrega contínua depende do DevOps.
