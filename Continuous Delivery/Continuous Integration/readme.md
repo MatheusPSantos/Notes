@@ -1,7 +1,7 @@
 ## Integração contínua
 
 - A sicronização do código se torna um evento, o que não deveria ser assim.
-- A integração contínua é algo sim, na raiz significa commitar as alteraçãoes frequêntemente.
+- A integração contínua é algo sim, na raiz significa commitar as alteraçãoes frequentemente.
 - A sincronização no final da sprint aumentam o surgimento de problemas;
 - A integração contínua objetiva adiantar o surgimento dos problemas, sem precisar de um evento centralizador para isso.
 
