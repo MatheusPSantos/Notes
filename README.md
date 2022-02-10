@@ -1,2 +1,4 @@
 # Notes
-Notes about content that i studying for while. #focous
+Notes about content that i studying for while.
+
+#focous
