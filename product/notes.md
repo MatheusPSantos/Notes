@@ -67,3 +67,45 @@ O jogo da transação: Quantas transações comerciais o usuário faz na sua pla
 
 O jogo da produtividade: Quantas tarefas digitais de alto valor o seu cliente pode executar no seu produto.
 
+
+Risco que o produto tem quando orientado aos resultados da empresa.
+
+
+## Risco de Viabilidade, Risco de Usabilidade, e Risco de Valor
+
+Risco de Mercado: Existe demandas suficiente para criação desse produto?
+
+A empresa já possui presença no segmento de mercado?
+
+Risco técnico: Qual o estágio de desenvolvimento da tecnologia no lançamento? Jpa existemum modelo similar no mercado?
+
+Esse produto é tecnologicamente viável? Tem arquitetura para desenvolver o produto?
+
+Risco do usuário: Quem define os atributos do produto? Ocorreu uma pesquisa com o usuário antecipadamente?
+
+Usuários veem valor no produto? Pagariam pelo produto?
+
+NPVR >> Net present value Risk Analysis
+
+>Validação = Suposições + Entrevistas + Insights
+
+
+
+
+
+
+
+
+
+
+## Dual Track Agile Development
+
+Duas filas concorrendo paralelamente
+
+A pista de discovery é a corrida de descobrir o produto;
+
+A pista de delivery é a corrida de entregar as features;
+
+Dual track é fundamental para garantir o Continuos Product Discorvery.
+  - cultura de produto sempre acompanhado de delivery.
+
