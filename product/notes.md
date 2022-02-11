@@ -90,13 +90,69 @@ NPVR >> Net present value Risk Analysis
 >Validação = Suposições + Entrevistas + Insights
 
 
+## 2 Tipos de Product Discovery
+
+Continuous Product Discovery:
+  - garantir as empresas estarão colocando os clientes no centro da sua estratégia.
+  - Essa atividade de descoberta precisa ter disciplina e constância.
+  - O CPD tem grande papel na manutenção da cultura do usuário como centro das decisões do produto. Ela também ajuda a influenciar diretamente o seu Roadmap e backlog.
+
+Product Discovery do Upstream:
+  - PDU é importante para reduzir riscos e incertezas das soluções
+  que desejamos investir para desenvolver.
+  - Essa atividade de descoberta atua no Upstream, logo após a avaliação da solução quanto ao nível de confiança ou risco que ela traz ao negócio.
+  - Alguns artefatos que estão ligados a essa solução são protótipos, Entrevistas, testes de usabilidade, Pocs, simulações de resultados e outros.
 
 
+## Product Discovert - How to
+### Objective key-results
+"OKR tem o objetivo de acompanhar uma pessoa a fim de colocar um cronômetro na mão dela, para que assim ela possa avaliar seu próprio desempenho. Não é um documento jurídico sobre o qual uma análise de desempenho deve se basear."
+
+- Os objetivos mais altos ou mais difíceis produziram os mais altos níveis de esforço e desempenho.
+
+A teoria do U invertido:
+  - Performance x Pressão
+  - Se houver baixa pressão no time, existirá baixa performance.
+  - Aumetar a pressão trás consequências, alto stress, ansiedade, infelicidade.
+  - Sweet spot, é o desempenho máximo, melhor performance.
+  - OKR pode ajudar a definir essa área de melhor performance.
+
+4 C's de uma meta:
+  - Clareza: A clareza na meta garante que a equipe entenda porque o objetivo vale a pena e é relevante para ela trabalhar.
+  - Critério: Ter um critério de sucesso, se foi ou não foi.
+  - Desafio (Chalange): O desafio transforma a meta em algo significativo e motivador que dá a oportunidade para o time ampliar seu conhecimento.
+  - Compromisso: O comprometimento atingido quando você envolve a equipe no planejamento, definição e execução da meta, gerande mais motivação e ownership.
+
+Roof-shots x Moonshots:
+  - Roof-shots: 1.3-2X por quarter de avanço de tecnologia e 
+  geração de oportunidades consistentes.
+    - avanço evolucionário.
+    - 80%
+    - Atingível, previsível, regular, melhorias contínuas.
+    - deve buscar atingir 100%
+
+  - Moonshots: 10X de salto de tecnologia disruptivo e geração de oportunidades.
+    - maior risco de alcançar os desafios.
+    - ter certeza de ter uma receita garantida.
+    - não tem sentido tentar moonshots se não houver consitências com roof-shots.
+    - 20% do tempo.
+    - Objetivos apertados, alta ambição, imprevisível, alto risco de falha, desafiador.
+    - deve buscar atingir 60-80%
 
 
+## Jobs to be done
+O JBTD é uma abordagem para desenvolvimento de produtos com base no entendimento do objetivo do cliente, o que eles chamam de "trabalho" do cliente, e no pensamento que levam esse cliente a "contratar" um produto para concluir o "trabalho", ou seja, atingir o seu objetivo.
 
+### Main jobs to be done (principais trabalhos)
+A tarefa que os clientes desejam realizar.
 
+### Related Jobs to be done (trabalhos relacionados)
+Tarefas que os clientes desejam realizar juntamente com as tarefas principais.
 
+Milkshake mistake: 40% dos milshakes são comprados de manhã, ele tava sendo contratado para ser uma companhia do motorista por ser simples de tomar.
+
+- como vender o produto.
+- o que por no produto.
 
 ## Dual Track Agile Development
 
