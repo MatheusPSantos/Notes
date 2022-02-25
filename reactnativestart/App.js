@@ -1,15 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Card from './components/Card';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Open up App.js to start working on your app!</Text>
-      <View style={styles.card}>
-        <Text>React Native</Text>
-        <Text>Criando aplicação em react native.</Text>
-      </View>
+      <ScrollView>
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+        <Card styles={styles} />
+      </ScrollView>
       <StatusBar style="inverted" />
     </View>
   );
@@ -21,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 100
   },
   title: {
     color: '#fff',
@@ -30,7 +46,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 12,
-    borderRadius: 3
+    borderRadius: 3,
+    margin: 10,
   },
   cardTitle: {
     fontSize: 18,
