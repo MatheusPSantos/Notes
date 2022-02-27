@@ -83,7 +83,7 @@ Cost of smart contracts:
 - DApps whose smart contracts are all open source have higher maximum transactions;
 
 
-###B Usabe Patterns of Smart Contracts
+### B Usabe Patterns of Smart Contracts
 - Developers use smart contracts to keep data on the chaim and do some operations;
 - Sometimes the operations are too complex to be done by one smart contract, so developers implement multiple smart contracts for a single DApp;
 -  Single Contract DApp -> are supported by one smart contract;
@@ -106,7 +106,7 @@ Includes two parts: deployment cost and execution cost;
 	- Contract executions with Internal Transactions: internal transactions also cost gas. Because smart contracts cannot actively initiate internal transactions, they are triggered by external transactions.
 
 - Difference among Smart Contract Usage patterns:
-	- new metric: agas -> a verage gas
+	- new metric: agas -> average gas
 	- agas = (SUM(gas median of functions i) * (Count of function i))/SUM(Count of functions i)
 
 	- In general, smart contracts of leader-member pattern and factory pattern cost more gas in contract executions.
