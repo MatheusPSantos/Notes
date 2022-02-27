@@ -61,3 +61,52 @@ Cost of smart contracts:
 - popularity by transaction volumes
 
 ## DApp category
+- After Feb. 2018, more DApps were published every day.
+- DApps from category Exchanges and Finance were hot early. and the DApps with the financial feature like gambling games grew rapidly.
+
+
+## Development Of DApps
+### Open source
+- On-chain: smart contracts are implemented to use the capability of blockchains
+- Off-chain: where traditional programs are implemented to provide services to end-users.
+- Two levels of open source of DApss: contract level (on-chain) and project level (off-chain)
+- DApp project is not open source and Smart contract are all closed source is the 25% of the amount;
+- DApp project is not open source and Smart contract are all open source is the 27.8% of the amount;
+- DApp project is open source but Smart contract are all closed source is the 27.3% of the amount;
+- DApp project is open source and the Smart contract are all open source is the 15.7% of the amount;
+- DApp project is open source and the part of the smart contract are open source is the 2.1% os the amount;
+- DApp project is not open source and the part of the smart contract are open source is the 2.1% of the amount;
+
+- Only 15.7% of DApps are fully open source and 25.0% of DApps are fully closed source;
+- This result implies that developers tend to share the code of smart contracts rather than the DApps.
+- DApps whose smart contracts are all closed source have smaller number of transactions;
+- DApps whose smart contracts are all open source have higher maximum transactions;
+
+
+###B Usabe Patterns of Smart Contracts
+- Developers use smart contracts to keep data on the chaim and do some operations;
+- Sometimes the operations are too complex to be done by one smart contract, so developers implement multiple smart contracts for a single DApp;
+-  Single Contract DApp -> are supported by one smart contract;
+- Multi-contract Dapps -> are supported by multiple smart contracts;
+
+## Cost of Smart Cntract in DApps
+Includes two parts: deployment cost and execution cost;
+- Deployments and executions are done as transactions, which cost gas;
+- Gas are paid with Ethers;
+- The amount of gas used as complexity of a contract execution;
+- Deployment cost of Smart contract:
+	- Deployment cost of different usage patterns of smart contracts:
+		- smart contract of the single pattern cost smaller than othes;
+		- smart contracts of leader-member pattern and equivalent pattern have mnore deployment cost;
+	- Influence Factors:
+		- Number of Functions, Lines of Code, could reflect the complexity of smart contract and may influence the deployment cost;
+- Execution cost of smart contracts:
+	- Users (caller) sends gas and Ether if necessary to execute function;
+	- Gas sent in transactions: in pratice, end users interacts with clients, where some operations are translated to contract executions and sent to smart contracts;
+	- Contract executions with Internal Transactions: internal transactions also cost gas. Because smart contracts cannot actively initiate internal transactions, they are triggered by external transactions.
+
+- Difference among Smart Contract Usage patterns:
+	- new metric: agas -> a verage gas
+	- agas = (SUM(gas median of functions i) * (Count of function i))/SUM(Count of functions i)
+
+	- In general, smart contracts of leader-member pattern and factory pattern cost more gas in contract executions.
