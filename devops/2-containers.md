@@ -66,6 +66,25 @@ Componentes do Kubernets para usarmos em nossas aplicações containerizadas:
 - **Services**: Pods que trabalham em conjunto.
 - **Deployments**: Provê uma única declaração para Pods e ReplicaSets;
 - **Labels**: Usado para organizar serviços.
+- **Daemonsets**: Rodar sempre um ou mais pods por nó.
+- **Secrets**: salvar dados sensitivos como senhas de bancos de dados.
+- **ConfigMaps**: Arquivo de configuração que suas aplicações irão usar.
+- **Cron Jobs**: Executar tarefas temporais, uma vez ou repetidas vezes.
+### O que podemos fazer?
+- **Deployments de containers e controle de Rollback**
+
+Descreva seus containers e quantos você quer com o "Deployment". Kubernets irá manter esses containers rodando e irá gerenciar mudanças no deployment (como atualizar imagens ou mudar variáveis de ambiente) com um "rollout". Pode pausar, resumir, fazer rollback das alterações como voce preferir.
+
+-**Cluster Heterogêneo**
+
+Kubernets roda em qualquer lugar. Pode construir cluster para um conjunto de VM's rodando na nuvem, on-premisses, ou bare metal dentro do seu data center.
+
+- **HA**
+
+Kubernets é escalável para o planeta Terra. Isto requer atenção especial para funcionalidades de HA como multi-master ou cluster federation. Cluster Federation permite conectar clusters em conjunto, para permitir que se um cluster caia, os containers podem automaticamente serem movidos para o outro cluster.
+
+Estes itens fazem o Kubernets perfeito para rodar diferentes arquiteturas de aplicações, desde as monolíticas aplicações web, até aplicaçõse de microserviços altamente distribuídos,e até memso aplicações batch.
+
 
 
 
