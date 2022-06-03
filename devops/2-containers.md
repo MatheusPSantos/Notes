@@ -19,3 +19,24 @@ No mundo do container temos a Infraestrutura, Sistema Operacional e o Docker Eng
 - **imagens otimizadas** - as imagens do Docker são tipicamente muito pequenas, o que facilita a entrega rápida e reduz o tempo de implantação de novos containers de aplicativos.
 - **compartilhamento** - pode usar um repositório remoto ou local para compartilhar suas imagens.
 - **manutenção simplificada** - Docker reduz o esforço e o risco de problemas com dependências de aplicativos.
+
+# Rancher
+
+O Rancher é open source que contém um conjunto de códigos que contém um conjunto de softwares necessários para o gerenciamento e orquestração de containers via web.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
