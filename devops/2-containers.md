@@ -14,5 +14,8 @@ No mundo do container temos a Infraestrutura, Sistema Operacional e o Docker Eng
 ## por quê usar?
 - implementação rápida de aplicativos - os containers incluem os requisitos mínimos de execução do aplicativo, reduzindo seu tamanho e permitindo que sejam implantados rapidamente.
 
-- 
-
+- **portabilidade entre máquinas** - um aplicativo e todas as suas dependências podem ser empacotadas em um único container independente da versão host do Kernel Linux, distribuição ou modelo de implantação.
+- **Controle de versão e reutilização de componentes** - é possível controlar versões sucessivas de um container, inspecionar diferentes ou reverter para versões anteriores.
+- **imagens otimizadas** - as imagens do Docker são tipicamente muito pequenas, o que facilita a entrega rápida e reduz o tempo de implantação de novos containers de aplicativos.
+- **compartilhamento** - pode usar um repositório remoto ou local para compartilhar suas imagens.
+- **manutenção simplificada** - Docker reduz o esforço e o risco de problemas com dependências de aplicativos.
