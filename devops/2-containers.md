@@ -24,6 +24,102 @@ No mundo do container temos a Infraestrutura, Sistema Operacional e o Docker Eng
 
 O Rancher é open source que contém um conjunto de códigos que contém um conjunto de softwares necessários para o gerenciamento e orquestração de containers via web.
 
+O Rancher aceita tanto hosts Linux de nuvem pública, nuvem privada, servidores físicos ou máquinas virtuais, o Rancher não faz distinção em seu uso, implementando uma camada de serviços de infra-estrutura projetados especificamente para facilitar o gerenciamento de aplicações em containers.
+
+Os serviços de infraestrutura do Rancher incluem **rede**, **armazenamento**, **volumes**, **balanceador de carga**, **DNS**.
+
+O Rancher orquestra o **kubernets**. O rancher vem com uma camada acima e permite automatizar a parte de gerenciamento e criação do Kubernets. Proviosanmento, Upgrades, RBAC, Monitoramento, Health Check, Backup.
+
+Rancher User Experience -> User Interface, App Catalog, Docker run, Kubectl, API, CLI.
+
+O Rancher tem outros produtos também, como o K3S.io, um Kubernets mais leve. Rancher Os, que é um sistema Operacional, é um Linux que carrega somente o suficiente para rodar containers, o próprio sistema operacionla é um container. Long Horn, é um projeto da Rancher para trabalhar com volume de cluster, o disco do container.
+
+# Kubernets
+
+Kubernets é uma plataforma open source de gerenciamento de containers de nível enterprise, baseado em 15 anos de experiência do Google e pronto para o mundo multi-cloud: nuvem pública, nuvem privada ou híbrida. Possui desenho modular e pode ser rodado em quase qualquer lugar.
+
+Kubernets provê uma arquitetura flexível, e com mecanismo desacoplado de service discovery. Como a maioria de plataformas computacionais distribuídas, um cluster consiste:
+- Pelo Menos um master e múltiplos node de computação.
+
+O mmaster é responsável pela API, agendamento dos deployments e gerenciamento total do cluster.
+
+UI <--> API <---> Kubernets Master --E Node1, Node 2, Node 3, ... Node n.
+
+Dentro do Kubernets Master temos:
+- API server
+- Scheduler
+- Controller
+- etcd:
+
+Cada Nó do cluster roda:
+- Container runtime, Docker ou Rocket, com os agentes para se comunicar com o master.
+- Componentes adicionais para logs, monitoramento, service discovery e add-ons opcionais.
+
+Os nós, são trabalhadores do Cluster. Eles expõem os serviços de computação, rede e armazenamento para as aplicações. Em cada nó:
+- DOcker
+- Kubelet
+- Kube-proxy
+- Fluentd
+
+Componentes do Kubernets para usarmos em nossas aplicações containerizadas:
+- **Pods**: Containers que trabalham em conjunto.
+- **Services**: Pods que trabalham em conjunto.
+- **Deployments**: Provê uma única declaração para Pods e ReplicaSets;
+- **Labels**: Usado para organizar serviços.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
