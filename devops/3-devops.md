@@ -38,3 +38,31 @@ Infraestrutura como código
 Monitoração e Log
 - Monitorar e analisar métricas e logs
 - Compreender o desempenho da infra-estrutura e da aplicação em tempo real
+
+### Benefícios do DevOps
+- Colaboração otimizada
+- Entrega rápida
+- Confiabilidade
+- Segurança
+- Escala
+- Velocidade
+
+### Pipeline
+
+Ações automáticas de transições; desenvolvimento para à produção.
+
+Benefícios:
+- mais rápido
+- mais seguro
+- simplificação e padronização
+- visualização do processo
+
+### Pipelina mais comum
+- develop -> Build -> Package -> [Test -> Deploy/Upgrade -> Operate] (Rancher)
+- develop (github)
+- CI Platform (jenkins)
+- Container Registry (Docker hub)
+- Rancher
+
+
+
