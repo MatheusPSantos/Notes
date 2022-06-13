@@ -1,0 +1,36 @@
+O que é modelo de domínio?
+
+domínio: é a área de negócio observada
+Modelo de domínio: é um modelo que descreve
+	- as entidades do domínio
+	- as inter-relações entre elas
+
+O modelo de domínio tem vários níveis de abstração;
+Abstração é o quanto escondemos detalhes;
+
+Níveis de abstração:
+- conceitual ou de análise de negócio
+	- responsável: analista de negócio
+	-objetivo: descrever as entidades do domínio do negócio, porém independentemente de sistema
+
+- Conceitual ou de análise de sistema:
+	- responsável: analista de sistema
+	- objetivo: descrever as entidades do domínio do sistema e suas inter-relações:
+		- independentemente da tecnologia e paradigma
+
+- Lógico ou de Design:
+	- responsável: Projetista
+	- objetivo: Descrever as entidades do domínio (do sistema) e suas inter-relações:
+		- preso a um paradigma
+		- independente de tecnologia
+
+Físico ou de implementação:
+	- responsável: Implementador
+	- objetivo: descrever as entidades do domínio e suas interações
+		- preso a um paradigma e preso a uma tecnologia
+
+
+Análise: descrever o PROBLEMA (independente de tecnologia e paradigma)
+Design: descrever a SOLUÇÃO (preso ao paradigma)
+
+Analise e Design tendem a ser mais próximas no desenvolvimento orientado a objetos;
