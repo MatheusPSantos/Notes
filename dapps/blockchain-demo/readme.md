@@ -16,4 +16,11 @@
     - Com o node rodando, ainda precisamos fazer o deploy do contrato
     - rodar o script específico com npx hardhat run scripts/nome.js e usar a flag --network localhost para fazer o deploy no localhost
     - irá aparecer um endereco que aponta onde foi feito o deploy. Exemplo: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+5 - instalar a biblioteca ethers js.
+    - versao usada = 5
+    - provider --> somente leitura na blockchain
+    - signer --> tem acesso a chave privada e pode fazer mudancas e criar transcoes com a blockchain
     - 
+
+## sobre o projeto
+A pasta `app` contém o projeto front end.
