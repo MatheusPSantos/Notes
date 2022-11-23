@@ -16,11 +16,16 @@ async function main() {
   const Lock = await hre.ethers.getContractFactory("Lock");
   const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
+  const greeter = await Lock.deploy(unlockTime, "Lets go Brazil! World Cup 2022.");
+
   await lock.deployed();
+  await greeter.deployed();
 
   console.log(
     `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
   );
+
+  console.log(`Deployed greeting with %s`, greeter);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

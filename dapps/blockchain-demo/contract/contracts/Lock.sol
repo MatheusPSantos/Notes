@@ -6,10 +6,10 @@ import "hardhat/console.sol";
 contract Lock {
     uint public unlockTime;
     address payable public owner;
-
+    string private greeting;
     event Withdrawal(uint amount, uint when);
 
-    constructor(uint _unlockTime) payable {
+    constructor(uint _unlockTime, string memory _greeting) payable {
         require(
             block.timestamp < _unlockTime,
             "Unlock time should be in the future"
@@ -17,6 +17,8 @@ contract Lock {
 
         unlockTime = _unlockTime;
         owner = payable(msg.sender);
+        greeting = _greeting;
+        console.log("Changing greeting from ", greeting, " to ", _greeting);
     }
 
     function withdraw() public {
@@ -32,4 +34,8 @@ contract Lock {
     }
 
     function deposit() payable public {}
+
+    function greet() public view returns (string memory) {
+        return greeting;
+    }
 }

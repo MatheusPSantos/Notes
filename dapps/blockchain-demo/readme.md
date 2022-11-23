@@ -9,7 +9,7 @@
 3 - tests
     - testar é preciso pois n pode alterar o SC quando faz o deploy
 4 - Deploy
-    - npx hardhat run srcipts/
+    - npx hardhat run scripts/
     - ou start com npx hardhat node
     - instalar metamask, adicionar a rede de teste localhost:8545 com chain id 31337 para o hardhat e
  depois escolher um private key fornecido e adicionar na metamask.
@@ -20,7 +20,9 @@
     - versao usada = 5
     - provider --> somente leitura na blockchain
     - signer --> tem acesso a chave privada e pode fazer mudancas e criar transcoes com a blockchain
+6 - querying blockchain
+    - usar o signer
+    - user sendTransaction()
     - 
-
 ## sobre o projeto
 A pasta `app` contém o projeto front end.
