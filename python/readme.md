@@ -13,3 +13,13 @@ nome = input()
 print('Olá, %s', nome)
 ```
 
+Em python, string é tudo que estiver entre:
+- Aspas simples, ex: 'String em python'
+- Aspas duplas, ex: "String em python"
+- Aspas simples triplas, ex: '''String em python'''
+- Aspas duplas triplas, ex: """String em python"""
+
+A entrada de dados em uma linha:
+```python
+nome = input("Qual o seu nome? ")
+```
