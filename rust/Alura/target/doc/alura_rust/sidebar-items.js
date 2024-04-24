@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["PI"],"fn":["erros","escopo","main","ownership","pattern_matching","repeticoes","result","rouba","rouba2","soma","sombra"],"static":["variavel_global"]};

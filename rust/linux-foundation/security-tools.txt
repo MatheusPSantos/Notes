@@ -1,0 +1,17 @@
+AFL.rs -> is a fuzzy tool for automatically discovering vulnerabilities in software.
+
+Honggfuzz -> similar to AFL.rs but allwos fuzzing of native rust and non-rust programs
+	uses genetic algorithms to mutates input data and measure code coverage.
+
+Rustscan -> network scannig tool to Rust concurrency features. Uses multithreading to scan multiple ports simultaneously. Manage socket to minimize overhead.
+
+Rustls -> TLS library emphasizes security, making it suitable for secure networking applications. Implements modern cryptographic protocols to protect data agains eavesdropping and tampering.
+Manages the handshake between client and server.
+
+cargo-audit -> audits Cargo.lock files for known vulnerable dependencies.
+
+RustSec -> is a security advisory organization and database for Rust.
+
+Cargo-Geiger -> scans Rust projects for usage of unsafe code. Analyzes the dependencies listed in Cargo.toml file for Rust Project.
+
+Parity Ehtereum -> is an Ethereum client built in Rust.
