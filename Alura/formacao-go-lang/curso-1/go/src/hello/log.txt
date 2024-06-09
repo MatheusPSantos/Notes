@@ -1,0 +1,51 @@
+https://www.httpbin.org/status/502 - Online: false
+https://www.alura.com.br - Online: true
+https://github.com - Online: true
+https://linkedin.com - Online: true
+https://www.httpbin.org/status/502 - Online: false
+https://www.alura.com.br - Online: true
+https://github.com - Online: true
+https://linkedin.com - Online: true
+https://www.httpbin.org/status/502 - Online: false
+https://www.alura.com.br - Online: true
+https://github.com - Online: true
+https://linkedin.com - Online: true
+https://www.httpbin.org/status/502 - Online: false
+https://www.alura.com.br - Online: true
+https://github.com - Online: true
+https://linkedin.com - Online: true
+00/00/0000 00:00:00 - https://www.httpbin.org/status/502 - Online: false
+00/00/0000 00:00:00 - https://www.alura.com.br - Online: true
+00/00/0000 00:00:00 - https://github.com - Online: true
+06/06/6000 60:60:60 - https://www.httpbin.org/status/502 - Online: false
+06/06/6000 60:60:60 - https://www.alura.com.br - Online: true
+06/06/6000 60:60:60 - https://github.com - Online: true
+06/06/6000 60:60:60 - https://linkedin.com - Online: true
+06/06/6000 60:60:60 - https://www.httpbin.org/status/502 - Online: false
+06/06/6000 60:60:60 - https://www.alura.com.br - Online: true
+06/06/6000 60:60:60 - https://github.com - Online: true
+06/06/6000 60:60:60 - https://linkedin.com - Online: true
+09/06/2024 11:09:11 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 11:09:11 - https://www.alura.com.br - Online: true
+09/06/2024 11:09:11 - https://github.com - Online: true
+09/06/2024 11:09:11 - https://linkedin.com - Online: true
+09/06/2024 11:09:11 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 11:09:11 - https://www.alura.com.br - Online: true
+09/06/2024 11:09:11 - https://github.com - Online: true
+09/06/2024 11:09:11 - https://linkedin.com - Online: true
+09/06/2024 11:59:46 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 11:59:46 - https://www.alura.com.br - Online: true
+09/06/2024 11:59:47 - https://github.com - Online: true
+09/06/2024 11:59:47 - https://linkedin.com - Online: true
+09/06/2024 11:59:52 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 11:59:53 - https://www.alura.com.br - Online: true
+09/06/2024 11:59:53 - https://github.com - Online: true
+09/06/2024 11:59:53 - https://linkedin.com - Online: true
+09/06/2024 11:59:58 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 11:59:58 - https://www.alura.com.br - Online: true
+09/06/2024 11:59:58 - https://github.com - Online: true
+09/06/2024 11:59:59 - https://linkedin.com - Online: true
+09/06/2024 12:00:04 - https://www.httpbin.org/status/502 - Online: false
+09/06/2024 12:00:04 - https://www.alura.com.br - Online: true
+09/06/2024 12:00:04 - https://github.com - Online: true
+09/06/2024 12:00:05 - https://linkedin.com - Online: true

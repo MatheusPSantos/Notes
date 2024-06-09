@@ -1,0 +1,4 @@
+https: //www.httpbin.org/status/502
+https: //www.alura.com.br
+https: //github.com
+https: //linkedin.com
