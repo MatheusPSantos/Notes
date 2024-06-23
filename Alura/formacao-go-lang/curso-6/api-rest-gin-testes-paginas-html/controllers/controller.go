@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,11 @@ func Saudacao(c *gin.Context) {
 func CriaNovoAluno(c *gin.Context) {
 	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+	if err := models.ValidaDadosAlunos(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
 		return
@@ -56,9 +62,17 @@ func DeletaAluno(c *gin.Context) {
 func EditaAluno(c *gin.Context) {
 	var aluno models.Aluno
 	id := c.Params.ByName("id")
+	
+	log.Print("AAAAAAAAAAAAAAAA >>>> ", id)
 	database.DB.First(&aluno, id)
 
 	if err := c.ShouldBindJSON(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
+	if err := models.ValidaDadosAlunos(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
 		return
