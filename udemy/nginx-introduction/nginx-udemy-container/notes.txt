@@ -1,0 +1,24 @@
+Spin up nginx container
+
+docker run --name nginx -p 80:80 --hostname ng1 -d nginx
+
+visit http://localhost:80
+
+create html folder and an html file inside it
+
+stop the container nginx
+
+docker stop nginx
+docker rm nginx
+
+brend new container
+
+ docker run --name nginx -p 80:80 --hostname ng1 -v /Users/matheussantos/Desktop/Estudos/Notes/udemy/nginx-introduction/nginx-udemy-container/html:/usr/share/nginx/html -d nginx
+
+this new command setup the volumns.
+can see running
+
+docker inspect nginx
+
+the field mount will show if the folder was mounted correctly
+
