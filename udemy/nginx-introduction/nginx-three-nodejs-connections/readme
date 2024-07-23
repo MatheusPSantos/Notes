@@ -1,0 +1,6 @@
+to run the nginx configuration
+ use pwd to get path to .conf file
+
+```bash
+docker run --name nginx --hostname ng1 -p 80:8080 -v /path/to/my-own/nginx.conf:/etc/nginx/nginx.conf nginx
+```
