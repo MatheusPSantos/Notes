@@ -1,4 +1,4 @@
-package duck;
+package com.br.padroesdeprojetos.duck;
 
 public abstract class Duck {
     FlyBehavior flyBehavior;
@@ -17,6 +17,15 @@ public abstract class Duck {
     }
 
     public void swim() {
-        System.out.println("Todo pato nada, até o de borracha.");
+        System.out.println("All ducks float, even decoys!");
     }
+
+    public void setFlyBehavior(FlyBehavior fb) {
+        flyBehavior = fb;
+    }
+
+    public void setQuackBehavior(QuackBehavior qb) {
+        quackBehavior = qb;
+    }
+
 }

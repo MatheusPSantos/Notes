@@ -1,6 +1,7 @@
-package duck;
+package com.br.padroesdeprojetos.duck;
 
 public class MallardDuck extends Duck {
+    
     public MallardDuck() {
         quackBehavior = new Quack();
         flyBehavior = new FlyWithWings();
