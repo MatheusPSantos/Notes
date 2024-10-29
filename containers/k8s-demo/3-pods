@@ -1,0 +1,466 @@
+Creating Pods
+
+Pods can be created a few ways.
+
+
+
+Creating Pod from Manifest
+
+Create a file and call it `pod-1.yaml`. In a text editor of your choice open `pod-1.yaml`.
+
+
+
+Add the following top level fields of a manifest file:
+
+kind: 
+
+apiVersion: 
+
+metadata:
+
+spec:
+
+
+
+We are going to need to denote the following fields: `kind`, `apiVersion`, `metadata` and `spec`.
+
+Set the `kind` to `Pod` and the `apiVersion` to `v1`. We are going to name this pod so in the `metadata` field set the `name` to `pod-1`. 
+
+The contents of `pod-1.yaml` should look like the following:
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: pod-1
+
+spec:
+
+  containers:
+
+  - name: nginx
+
+    image: nginx:1.14.2  
+
+    ports:
+
+    - containerPort: 80
+
+
+
+If we create this pod Kubernetes will assign it to the `default` namespace. So we are going to update this yaml to include the `namespace` be set to `namespace-1`:
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: pod-1
+
+  namespace: namespace-1
+
+spec:
+
+  containers:
+
+  - name: nginx
+
+    image: nginx:1.14.2  
+
+    ports:
+
+    - containerPort: 80
+
+
+
+Now we can run the following command to create the pod:
+
+$ kubectl create -f pod-1.yaml
+
+
+
+You should see the following output:
+
+pod/pod-1 created
+
+
+
+Creating Pod from the Terminal
+
+List some objects you can create a pod with `kubectl` using the `run` command and passing a few flags to the terminal:
+
+$ kubectl run pod-2 --image=nginx:1.14.2 --namespace=namespace-2
+
+
+
+You should see the following output:
+
+pod/pod-2 created
+
+
+
+Viewing Pods
+
+There are a couple of ways with `kubectl` to retrieve pods depending on what what data you are looking to get back.
+
+
+
+Get All Pods
+
+To get all pods you can run the following command:
+
+$ kubectl get pods
+
+
+
+You should get the following output:
+
+No resources found in default namespace.
+
+
+
+The pods we just created were assigned to different `namespaces` other than `default`. To see all the pods across all `namespaces` you will need to pass the `-A` flag:
+
+$ kubectl get pods -A
+
+
+
+You should get the following output:
+
+NAMESPACE     NAME                                      READY   STATUS      RESTARTS   AGE
+
+kube-system   local-path-provisioner-687d6d7765-d2767   1/1     Running     0          2d16h
+
+kube-system   coredns-7b5bbc6644-plwtg                  1/1     Running     0          2d16h
+
+kube-system   svclb-traefik-4bab5e67-xxjrj              2/2     Running     0          2d16h
+
+kube-system   helm-install-traefik-crd-6445x            0/1     Completed   0          2d16h
+
+kube-system   traefik-64b96ccbcd-wz6pp                  1/1     Running     0          2d16h
+
+kube-system   helm-install-traefik-dp6dr                0/1     Completed   1          2d16h
+
+kube-system   metrics-server-667586758d-rmt4n           1/1     Running     0          2d16h
+
+namespace-1   pod-1                                     1/1     Running     0          14m
+
+namespace-2   pod-2                                     1/1     Running     0          5m32s
+
+
+
+To narrow down the list of pods you are getting back you can pass the `namespace` flag and specify what namespace you are looking for:
+
+$ kubectl get pods --namespace=namespace-1
+
+
+
+You should get the following output:
+
+NAME    READY   STATUS    RESTARTS   AGE
+
+pod-1   1/1     Running   0          16m
+
+
+
+Describing Pods
+
+With `kubectl` we can use the `describe` command again to inspect objects in Kubernetes. Let's describe the pod called `pod-1`:
+
+$ kubectl describe pod pod-1 --namespace=namespace-1
+
+
+
+You should get the following output:
+
+Name:             pod-1
+
+Namespace:        namespace-1
+
+Priority:         0
+
+Service Account:  default
+
+Node:             lima-rancher-desktop/192.168.1.114
+
+Start Time:       Sat, 18 Mar 2023 14:34:55 -0400
+
+Labels:           <none>
+
+Annotations:      <none>
+
+Status:           Running
+
+IP:               10.42.0.90
+
+IPs:
+
+  IP:  10.42.0.90
+
+Containers:
+
+  nginx:
+
+    Container ID:   containerd://8eb54db30b221ea44c1e296af153f7359f7671d0c8ca59e00f102b886924fb76
+
+    Image:          nginx:1.14.2
+
+    Image ID:       docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+
+    Port:           80/TCP
+
+    Host Port:      0/TCP
+
+    State:          Running
+
+      Started:      Sat, 18 Mar 2023 14:34:56 -0400
+
+    Ready:          True
+
+    Restart Count:  0
+
+    Environment:    <none>
+
+    Mounts:
+
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dg6xq (ro)
+
+Conditions:
+
+  Type              Status
+
+  Initialized       True 
+
+  Ready             True 
+
+  ContainersReady   True 
+
+  PodScheduled      True 
+
+Volumes:
+
+  kube-api-access-dg6xq:
+
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+
+    TokenExpirationSeconds:  3607
+
+    ConfigMapName:           kube-root-ca.crt
+
+    ConfigMapOptional:       <nil>
+
+    DownwardAPI:             true
+
+QoS Class:                   BestEffort
+
+Node-Selectors:              <none>
+
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+Events:
+
+  Type    Reason     Age   From               Message
+
+  ----    ------     ----  ----               -------
+
+  Normal  Scheduled  27m   default-scheduler  Successfully assigned namespace-1/pod-1 to lima-rancher-desktop
+
+  Normal  Pulled     27m   kubelet            Container image "nginx:1.14.2" already present on machine
+
+  Normal  Created    27m   kubelet            Created container nginx
+
+  Normal  Started    27m   kubelet            Started container nginx
+
+
+
+⚠️ NOTE: once again we needed to pass the flag `--namespace=namespace-1` to find the pod in its namespace since we are still pointing to the `default` namespace.
+
+Updating Pods
+
+We are able to update objects in Kubernetes. Now we will update `pod-1`.
+
+In a text editor of your choice open up the manifest file called `pod-1.yaml`. We are going to now add a label to this pod with the key being `type` and the value being `webserver`.
+
+The file should look like this below:
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: pod-1
+
+  namespace: namespace-1
+
+  labels:
+
+    type: webserver
+
+spec:
+
+  containers:
+
+  - name: nginx
+
+    image: nginx:1.14.2  
+
+    ports:
+
+    - containerPort: 80
+
+
+
+Now run the following command:
+
+$ kubectl create -f pod-1.yaml 
+
+
+
+You should see the following output:
+
+Error from server (AlreadyExists): error when creating "pod-1.yaml": pods "pod-1" already exists
+
+
+
+This is because this pod exist already on this cluster. The command we need to use instead is `apply` and not `create`:
+
+$ kubectl apply -f pod-1.yaml 
+
+
+
+You should see the following output:
+
+Warning: resource pods/pod-1 is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+
+pod/pod-1 configured
+
+
+
+This is just a warning letting us know we were missing the `kubectl.kubernetes.io/last-applied-configuration` annotation. If we run a describe on `pod-1` we can see that our label was applied:
+
+$ kubectl describe pod pod-1 --namespace=namespace-1
+
+
+
+You should get the following output:
+
+Name:             pod-1
+
+Namespace:        namespace-1
+
+Priority:         0
+
+Service Account:  default
+
+Node:             lima-rancher-desktop/192.168.1.114
+
+Start Time:       Sat, 18 Mar 2023 14:34:55 -0400
+
+Labels:           type=webserver
+
+Annotations:      <none>
+
+Status:           Running
+
+IP:               10.42.0.90
+
+IPs:
+
+  IP:  10.42.0.90
+
+Containers:
+
+  nginx:
+
+    Container ID:   containerd://8eb54db30b221ea44c1e296af153f7359f7671d0c8ca59e00f102b886924fb76
+
+    Image:          nginx:1.14.2
+
+    Image ID:       docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+
+    Port:           80/TCP
+
+    Host Port:      0/TCP
+
+    State:          Running
+
+      Started:      Sat, 18 Mar 2023 14:34:56 -0400
+
+    Ready:          True
+
+    Restart Count:  0
+
+    Environment:    <none>
+
+    Mounts:
+
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dg6xq (ro)
+
+Conditions:
+
+  Type              Status
+
+  Initialized       True 
+
+  Ready             True 
+
+  ContainersReady   True 
+
+  PodScheduled      True 
+
+Volumes:
+
+  kube-api-access-dg6xq:
+
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+
+    TokenExpirationSeconds:  3607
+
+    ConfigMapName:           kube-root-ca.crt
+
+    ConfigMapOptional:       <nil>
+
+    DownwardAPI:             true
+
+QoS Class:                   BestEffort
+
+Node-Selectors:              <none>
+
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+Events:
+
+  Type    Reason     Age   From               Message
+
+  ----    ------     ----  ----               -------
+
+  Normal  Scheduled  44m   default-scheduler  Successfully assigned namespace-1/pod-1 to lima-rancher-desktop
+
+  Normal  Pulled     44m   kubelet            Container image "nginx:1.14.2" already present on machine
+
+  Normal  Created    44m   kubelet            Created container nginx
+
+  Normal  Started    44m   kubelet            Started container nginx
+
+
+
+Deleting Pods
+
+To delete a pod we will use the `delete` command and specify the `name` of the resource and the `type`:
+
+$ kubectl delete pod pod-2 --namespace=namespace-2
+
+
+
+You should see the following output:
+
+pod "pod-2" deleted
+

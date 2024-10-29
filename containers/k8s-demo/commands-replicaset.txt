@@ -1,0 +1,17 @@
+ 1101  kubectl config set-context --current --namespace=namespace-1
+ 1025  kubectl delete replicasets.apps replicaset-1
+ 1026  kubectl get pod
+ 1027  kubectl get pods
+ 1028  kubectl create -f deployment-1.yaml
+ 1029  kubectl get namespaces
+ 1030  kubectl get namespaces
+ 1031  kubectl create -f deployment-1.yaml
+ 1032  kubectl create -f deployment-1.yaml
+ 1033  kubectl describe deployments deployment-1.yaml
+ 1034  kubectl describe deployments deployment-1
+ 1035  kubectl set image deployments/deployment-1 nginx=nginx:1.6.1
+ 1036  kubectl describe deployments deployment-1
+ 1037  kubectl rollout history deployment/deployment-1
+ 1038  kubectl rollout undo deployment-1
+ 1039  kubectl rollout undo deployment/deployment-1
+ 1040  kubectl describe deployments deployment-1

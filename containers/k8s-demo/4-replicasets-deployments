@@ -1,0 +1,766 @@
+Workflow
+
+
+
+Updating Our Context
+
+Before we were having to specify what namespace we are looking for specific objects in. For example looking for Pods in `namespace-1` would look like this:
+
+kubectl get pods --namespace=namespace-1
+
+
+
+In stead of setting `--namespace=namespace-1` in ever call we can set it for this session:
+
+kubectl config set-context --current --namespace=namespace-1
+
+
+
+With the output looking like this:
+
+Context "rancher-desktop" modified.
+
+
+
+Now we can omit --namespace=namespace-1 from our kubectl calls.
+
+
+
+Creating ReplicaSet
+
+
+
+In a text editor of you choice create a file called replicaset-1.yaml, we will use this to build our ReplicaSet.
+
+Add in the base fields to the replicaset-1.yaml file:
+
+apiVersion: 
+
+kind: 
+
+metadata:
+
+spec:
+
+
+
+For the apiVersion set the value to apps/v1. And for the kind set the value to ReplicaSet. Now to build out the metadata section. We set the name to replicaset-1, this is the name of the ReplicaSet. Also to set namespace to namespace-1 as this is the namespace we will be working in. Next we are going to add the following labels with key set to type and value webserver.
+
+
+
+The metadata section should look like this:
+
+metadata:
+
+  name: replicaset-1
+
+  namespace: namespace-1
+
+  labels:
+
+    type: webserver
+
+
+
+Now we are going to build out the spec section.
+
+Set the replicas to 3. This is the number of pods we want Kubernetes to have running.
+
+Next we are going to build out the selector section. We now add the following matchLabels with the key set to type and the value to webserver.
+
+The template section will need a metadata subsection with labels that has a key of type and value webserver. This section will also need a subsection called spec this section is for the specification of the pods we want the ReplicaSet to create. it should look something like this:
+
+spec:
+
+  containers:
+
+  - name: nginx
+
+    image: nginx:1.14.2 
+
+
+
+The spec section of the ReplicaSet should look like this:
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      type: webserver
+
+  template:
+
+    metadata:
+
+      labels:
+
+        type: webserver
+
+    spec:
+
+      containers:
+
+      - name: nginx
+
+        image: nginx:1.14.2
+
+
+
+What replicaset-1.yaml should look like is this:
+
+apiVersion: apps/v1
+
+kind: ReplicaSet
+
+metadata:
+
+  name: replicaset-1
+
+  namespace: namespace-1
+
+  labels:
+
+    type: webserver
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      type: webserver
+
+  template:
+
+    metadata:
+
+      labels:
+
+        type: webserver
+
+    spec:
+
+      containers:
+
+      - name: nginx
+
+        image: nginx:1.14.2 
+
+
+
+Before we create this ReplicaSet we should see how many pods we have running. If we run the following command we can see what is running:
+
+kubectl get pods
+
+
+
+With the following output:
+
+NAME    READY   STATUS    RESTARTS   AGE
+
+pod-1   1/1     Running   0          2m17s
+
+
+
+This is the Pod we created in a previous lab and this ReplicaSet will have Kubernetes keep 3 of them running.
+
+
+
+Create the ReplicaSet:
+
+kubectl create -f replicaset-1.yaml 
+
+
+
+The output should look like the following:
+
+replicaset.apps/replicaset-1 created
+
+
+
+Interacting with the ReplicaSet
+
+We now can see what changes the ReplicaSet replicaset-1.yaml has done by seeing how many Pods we have running:
+
+kubectl get pods
+
+
+
+With the output looking like the following:
+
+NAME                 READY   STATUS    RESTARTS   AGE
+
+pod-1                1/1     Running   0          3m34s
+
+replicaset-1-vdsz9   1/1     Running   0          20s
+
+replicaset-1-69cxc   1/1     Running   0          20s
+
+
+
+The ReplicaSet we built was based on the pod-1 spec and was matched by the label that both the ReplicaSet has and the Pod has type: webserver. Kubernetes realized there was a Pod already running called pod-1 and added two more Pods.
+
+
+
+Deleting a Pod
+
+
+
+Let's see what happens when we delete a pod:
+
+kubectl delete pod pod-1 
+
+
+
+We should see an output like so:
+
+pod "pod-1" deleted
+
+
+
+Now if we get all pods for this Namespace it should have created a new pod:
+
+kubectl get pods
+
+
+
+Now we see that our original Pod is gone but Kubernetes created a new one for us:
+
+NAME                 READY   STATUS    RESTARTS   AGE
+
+replicaset-1-vdsz9   1/1     Running   0          6m21s
+
+replicaset-1-69cxc   1/1     Running   0          6m21s
+
+replicaset-1-9trqq   1/1     Running   0          80s
+
+
+
+Deleting a ReplicaSet
+
+
+
+Now we are going to delete our ReplicaSet:
+
+kubectl delete replicasets replicaset-1 
+
+
+
+With an output that looks like:
+
+replicaset.apps "replicaset-1" deleted
+
+
+
+Now if we look to see how many pods we have:
+
+kubectl get pods
+
+
+
+We now have no Pods running:
+
+No resources found in namespace-1 namespace.
+
+
+
+Creating a Deployment
+
+
+
+With the text editor of your choice create a file called deployment-1.yaml. In that file we need to add the the following:
+
+apiVersion: 
+
+kind: 
+
+metadata:
+
+spec:
+
+
+
+For apiVersion set that to apps/v1, and for kind set that to Deployment. In the metadata section we will need to set a few values, name is deployment-1 and set namespace to namespace-1. We are also going to add in a labels section with a key of type with a value of webapi. The file should look like this so far:
+
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: deployment-1
+
+  namespace: namespace-1
+
+  labels:
+
+    type: webapi
+
+
+
+Now we are going to build out the spec section of the Deployment. Set the replicas to 3. For the subsection selector add in a subsection called matchLabels we need to add the key type with the value of webapi. And it should look like this:
+
+selector:
+
+  matchLabels:
+
+    type: webapi
+
+
+
+Next we are going to build out the template subsection by adding metadata with labels subsection with a key of type and a value of webapi. This subsection should look something like this:
+
+  template:
+
+    metadata:
+
+      labels:
+
+        type: webapi
+
+
+
+Now we are going to build out the spec section that is for containers. This subsection should look something like this:
+
+spec:
+
+  containers:
+
+  - name: nginx
+
+  image: nginx:1.14.2
+
+  ports:
+
+  - containerPort: 80
+
+  resources:
+
+    requests:
+
+      memory: "32Mi"
+
+      cpu: "200m"
+
+    limits:
+
+      memory: "64Mi"
+
+      cpu: "300m"
+
+
+
+The final file deployment-1.yaml should look like this:
+
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: deployment-1
+
+  namespace: namespace-1
+
+  labels:
+
+    type: webapi
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      type: webapi
+
+  template:
+
+    metadata:
+
+      labels:
+
+        type: webapi
+
+    spec:
+
+      containers:
+
+      - name: nginx
+
+        image: nginx:1.14.2
+
+        ports:
+
+        - containerPort: 80
+
+        resources:
+
+          requests:
+
+            memory: "32Mi"
+
+            cpu: "200m"
+
+          limits:
+
+            memory: "64Mi"
+
+            cpu: "300m"
+
+
+
+Now we can deploy this deployment:
+
+kubectl create -f deployment-1.yaml 
+
+
+
+With the output looking like this:
+
+deployment.apps/deployment-1 created
+
+
+
+Rolling Out an Update to a Deployment
+
+Now we are going to update part of the deployment we just created.
+
+If we look at the deployment we can see what image these containers are using:
+
+kubectl describe deployments deployment-1 
+
+
+
+And you will see something like this:
+
+Name:                   deployment-1
+
+Namespace:              namespace-1
+
+CreationTimestamp:      Wed, 29 Mar 2023 19:25:51 -0400
+
+Labels:                 type=webapi
+
+Annotations:            deployment.kubernetes.io/revision: 1
+
+Selector:               type=webapi
+
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+
+StrategyType:           RollingUpdate
+
+MinReadySeconds:        0
+
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+
+Pod Template:
+
+  Labels:  type=webapi
+
+  Containers:
+
+   nginx:
+
+    Image:      nginx:1.14.2
+
+    Port:       80/TCP
+
+    Host Port:  0/TCP
+
+    Limits:
+
+      cpu:     300m
+
+      memory:  64Mi
+
+    Requests:
+
+      cpu:        200m
+
+      memory:     32Mi
+
+    Environment:  <none>
+
+    Mounts:       <none>
+
+  Volumes:        <none>
+
+Conditions:
+
+  Type           Status  Reason
+
+  ----           ------  ------
+
+  Available      True    MinimumReplicasAvailable
+
+  Progressing    True    NewReplicaSetAvailable
+
+OldReplicaSets:  <none>
+
+NewReplicaSet:   deployment-1-7b59457db7 (3/3 replicas created)
+
+Events:
+
+  Type    Reason             Age    From                   Message
+
+  ----    ------             ----   ----                   -------
+
+  Normal  ScalingReplicaSet  6m41s  deployment-controller  Scaled up replica set deployment-1-7b59457db7 to 3
+
+
+
+This image is that what we set before as image: nginx:1.14.2, we are going to want to update that and we can do that with kubectl:
+
+kubectl set image deployment/deployment-1 nginx=nginx:1.16.1
+
+
+
+And we will get an output that looks something like this:
+
+deployment.apps/deployment-1 image updated
+
+
+
+Now if we describe this deployment:
+
+kubectl describe deployments deployment-1
+
+
+
+It will look something similar to this:
+
+Name:                   deployment-1
+
+Namespace:              namespace-1
+
+CreationTimestamp:      Wed, 29 Mar 2023 19:25:51 -0400
+
+Labels:                 type=webapi
+
+Annotations:            deployment.kubernetes.io/revision: 2
+
+Selector:               type=webapi
+
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+
+StrategyType:           RollingUpdate
+
+MinReadySeconds:        0
+
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+
+Pod Template:
+
+  Labels:  type=webapi
+
+  Containers:
+
+   nginx:
+
+    Image:      nginx:1.16.1
+
+    Port:       80/TCP
+
+    Host Port:  0/TCP
+
+    Limits:
+
+      cpu:     300m
+
+      memory:  64Mi
+
+    Requests:
+
+      cpu:        200m
+
+      memory:     32Mi
+
+    Environment:  <none>
+
+    Mounts:       <none>
+
+  Volumes:        <none>
+
+Conditions:
+
+  Type           Status  Reason
+
+  ----           ------  ------
+
+  Available      True    MinimumReplicasAvailable
+
+  Progressing    True    NewReplicaSetAvailable
+
+OldReplicaSets:  <none>
+
+NewReplicaSet:   deployment-1-6fcd6956dd (3/3 replicas created)
+
+Events:
+
+  Type    Reason             Age   From                   Message
+
+  ----    ------             ----  ----                   -------
+
+  Normal  ScalingReplicaSet  17m   deployment-controller  Scaled up replica set deployment-1-7b59457db7 to 3
+
+  Normal  ScalingReplicaSet  109s  deployment-controller  Scaled up replica set deployment-1-6fcd6956dd to 1
+
+  Normal  ScalingReplicaSet  108s  deployment-controller  Scaled down replica set deployment-1-7b59457db7 to 2
+
+  Normal  ScalingReplicaSet  108s  deployment-controller  Scaled up replica set deployment-1-6fcd6956dd to 2
+
+  Normal  ScalingReplicaSet  107s  deployment-controller  Scaled down replica set deployment-1-7b59457db7 to 1
+
+  Normal  ScalingReplicaSet  107s  deployment-controller  Scaled up replica set deployment-1-6fcd6956dd to 3
+
+  Normal  ScalingReplicaSet  106s  deployment-controller  Scaled down replica set deployment-1-7b59457db7 to 0
+
+
+
+Here we can see the image was updated image: nginx:1.16.1.
+
+
+
+Rolling Back an Update to a Deployment
+
+
+
+If for some reason this update broke something or we need to roll back we can do that with a Deployment.
+
+First we need to see the deployment history:
+
+kubectl rollout history deployment/deployment-1
+
+
+
+The output should look something like this:
+
+deployment.apps/deployment-1 
+
+REVISION  CHANGE-CAUSE
+
+1         <none>
+
+2         <none>
+
+
+
+To roll this back we can roll the following command:
+
+kubectl rollout undo deployment/deployment-1 
+
+
+
+The output should look something like this:
+
+deployment.apps/deployment-1 rolled back
+
+
+
+Now we can check the rollback:
+
+kubectl describe deployments deployment-1  
+
+
+
+The output should look something like this:
+
+Name:                   deployment-1
+
+Namespace:              namespace-1
+
+CreationTimestamp:      Wed, 29 Mar 2023 19:25:51 -0400
+
+Labels:                 type=webapi
+
+Annotations:            deployment.kubernetes.io/revision: 3
+
+Selector:               type=webapi
+
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+
+StrategyType:           RollingUpdate
+
+MinReadySeconds:        0
+
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+
+Pod Template:
+
+  Labels:  type=webapi
+
+  Containers:
+
+   nginx:
+
+    Image:      nginx:1.14.2
+
+    Port:       80/TCP
+
+    Host Port:  0/TCP
+
+    Limits:
+
+      cpu:     300m
+
+      memory:  64Mi
+
+    Requests:
+
+      cpu:        200m
+
+      memory:     32Mi
+
+    Environment:  <none>
+
+    Mounts:       <none>
+
+  Volumes:        <none>
+
+Conditions:
+
+  Type           Status  Reason
+
+  ----           ------  ------
+
+  Available      True    MinimumReplicasAvailable
+
+  Progressing    True    NewReplicaSetAvailable
+
+OldReplicaSets:  <none>
+
+NewReplicaSet:   deployment-1-7b59457db7 (3/3 replicas created)
+
+Events:
+
+  Type    Reason             Age                From                   Message
+
+  ----    ------             ----               ----                   -------
+
+  Normal  ScalingReplicaSet  64s                deployment-controller  Scaled up replica set deployment-1-7b59457db7 to 1
+
+  Normal  ScalingReplicaSet  61s                deployment-controller  Scaled down replica set deployment-1-6fcd6956dd to 2
+
+  Normal  ScalingReplicaSet  61s                deployment-controller  Scaled up replica set deployment-1-7b59457db7 to 2
+
+  Normal  ScalingReplicaSet  59s                deployment-controller  Scaled down replica set deployment-1-6fcd6956dd to 1
+
+  Normal  ScalingReplicaSet  59s (x2 over 19h)  deployment-controller  Scaled up replica set deployment-1-7b59457db7 to 3
+
+  Normal  ScalingReplicaSet  57s                deployment-controller  Scaled down replica set deployment-1-6fcd6956dd to 0
+
+
+
+
+And if we look the image for NGINX is now back to image: nginx:1.14.2.
+
+

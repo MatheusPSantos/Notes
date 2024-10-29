@@ -1,0 +1,140 @@
+View Context
+
+In the terminal run the following command:
+
+$ kubectl config view
+
+
+
+The output should look similar to this:
+
+apiVersion: v1
+
+clusters:
+
+- cluster:
+
+    certificate-authority-data: DATA+OMITTED
+
+    server: https://127.0.0.1:6443
+
+  name: rancher-desktop
+
+contexts:
+
+- context:
+
+    cluster: rancher-desktop
+
+    user: rancher-desktop
+
+  name: rancher-desktop
+
+current-context: rancher-desktop
+
+kind: Config
+
+preferences: {}
+
+users:
+
+- name: rancher-desktop
+
+  user:
+
+    client-certificate-data: REDACTED
+
+    client-key-data: REDACTED
+
+
+
+This command displays the current cluster you are pointed to.
+
+
+
+Note the current context as noted above:
+
+current-context: rancher-desktop
+
+
+
+Get Nodes
+
+In a terminal run the following command to get all the nodes of the cluster you are targeting:
+
+$ kubectl get nodes
+
+
+
+The output should look something similar to the following:
+
+NAME                   STATUS   ROLES                  AGE   VERSION
+
+lima-rancher-desktop   Ready    control-plane,master   25d   v1.24.10+k3s1
+
+
+
+Depending on the number of nodes in your cluster you might see more than one. If you are using Rancher Desktop you will only see one node.
+
+Get Namespaces
+
+In a terminal run the following command:
+
+$ kubectl get namespaces
+
+
+
+The output should look something similar to this:
+
+NAME              STATUS   AGE
+
+default           Active   3m53s
+
+kube-system       Active   3m53s
+
+kube-public       Active   3m53s
+
+kube-node-lease   Active   3m53s
+
+
+
+Get Pods
+
+In a terminal run the following command to get all the pods running on the cluster you are targeting:
+
+$ kubectl get pods
+
+
+
+If you are using a new cluster you should see the following:
+
+No resources found in default namespace.
+
+
+
+This is because there are no pods running in the current namespace you are in.
+
+To view all pods in all namespaces we will need to add the `-A` flag to show all pods across all name spaces:
+
+$ kubectl get pods -A
+
+
+
+The output should look something like this:
+
+NAMESPACE     NAME                                                       READY   STATUS      RESTARTS   AGE
+
+kube-system   local-path-provisioner-687d6d7765-d2767    1/1     Running     0          37s
+
+kube-system   coredns-7b5bbc6644-plwtg                            1/1     Running     0          37s
+
+kube-system   svclb-traefik-4bab5e67-xxjrj                          2/2     Running     0          32s
+
+kube-system   helm-install-traefik-crd-6445x                       0/1     Completed   0          37s
+
+kube-system   traefik-64b96ccbcd-wz6pp                             1/1     Running     0          32s
+
+kube-system   helm-install-traefik-dp6dr                               0/1     Completed   1          37s
+
+kube-system   metrics-server-667586758d-rmt4n                 1/1     Running     0          37s
+

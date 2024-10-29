@@ -1,0 +1,303 @@
+Creating Namespaces
+
+Namespaces can be create a few ways.
+
+
+
+Creating Namespace from Manifest
+
+Create a file and call it `namespace-1.yaml`.
+
+In a text editor of your choice open `namespace-1.yaml`.
+
+Add the following top level fields of a manifest file:
+
+kind: 
+
+apiVersion: 
+
+metadata:
+
+
+
+We are denoting the `kind`, `apiVersion`, and `metadata`.
+
+Set the `kind` to `Namespace` and the `apiVersion` to `v1`. Next we need to add the `name` to the `metadata` property and we can set the name to `namespace-1`. And finally let's set a label of `name` to `namespace-1`.
+
+The contents of `namespace-1.yaml` should look like the following:
+
+kind: Namespace
+
+apiVersion: v1
+
+metadata:
+
+  name: namespace-1  
+
+  labels:
+
+    name: namespace-1
+
+
+
+Right now the Namespace is only a `yaml` file locally. Next we are going to create the resource on our cluster. To do so open a terminal and navigate to the director where you created `namespace-1.yaml`. Once there run the following command:
+
+$ kubectl create -f namespace-1.yaml
+
+
+
+You should see the following output:
+
+namespace/namespace-1 created
+
+
+
+Creating Namespace from the Terminal
+
+Namespaces are also easy to create directly from the terminal using `kubectl`. To do so you can run the following command:
+
+$ kubectl create namespace namespace-2
+
+
+
+You should see the following output:
+
+namespace/namespace-2 created
+
+
+
+Viewing Namespaces
+
+There are a few ways with `kubectl` depending on what what data you would like to retrieve.
+
+
+
+Get All Namespaces
+
+To get all namespaces of your cluster you can run the following command:
+
+$ kubectl get namespaces
+
+
+
+You should get the following output:
+
+NAME              STATUS   AGE
+
+default           Active   47h
+
+kube-system       Active   47h
+
+kube-public       Active   47h
+
+kube-node-lease   Active   47h
+
+namespace-1       Active   8m50s
+
+namespace-2       Active   5m11s
+
+
+
+Get Specific Namespace
+
+To get a specific namespace you can simply pass the `name` field in the command and get the namespace you are looking for:
+
+$ kubectl get namespaces namespace-1
+
+
+
+You should get the following output:
+
+NAME          STATUS   AGE
+
+namespace-1   Active   15m
+
+
+
+Get Namespace by Label
+
+We can also get objects by their label to do so run the following command:
+
+$ kubectl get namespaces -l name=namespace-1
+
+
+
+You should get the following output:
+
+NAME          STATUS   AGE
+
+namespace-1   Active   34m
+
+
+
+We got this resource by matching the label we are looking for. If we do this with `namespace-2`:
+
+$ kubectl get namespaces -l name=namespace-2
+
+
+
+You should get the following output:
+
+No resources found
+
+
+
+Describing Namespaces
+
+The `kubectl` `describe` command allows us to inspect objects in Kubernetes. Let's do a `describe` command on the `namespace-1` namespace:
+
+$ kubectl describe namespaces namespace-1
+
+
+
+You should get the following output:
+
+Name:         namespace-1
+
+Labels:       kubernetes.io/metadata.name=namespace-1
+
+              name=namespace-1
+
+Annotations:  <none>
+
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+
+
+Now let's do a describe command on the `namespace-2` namespace:
+
+$ kubectl describe namespaces namespace-2
+
+
+
+You should get the following output:
+
+Name:         namespace-2
+
+Labels:       kubernetes.io/metadata.name=namespace-2
+
+Annotations:  <none>
+
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+
+
+⚠️ NOTE: the different between `namespace-1` and `namespace-2` is that `namespace-2` is missing the label `name`. This was omitted in creating the namespace from the terminal. This is also why we didn't find `namespace-2` when we try to get the namespace based on the label assigned.
+
+Annotating Namespace
+
+
+
+Creating Namespace from Manifest with Annotations
+
+Create a file and call it `namespace-3.yaml`.
+
+In a text editor of your choice open `namespace-3.yaml`.
+
+Add the following top level fields of a manifest file:
+
+kind: 
+
+apiVersion: 
+
+metadata:
+
+
+
+We are denoting the `kind`, `apiVersion`, and `metadata`.
+
+Set the `kind` to `Namespace` and the `apiVersion` to `v1`. Next we need to add the `name` to the `metadata` property and we can set the name to `namespace-3`. Now let's add the `annotation` section with the key `generated-by` and the value `yaml`.
+
+The contents of `namespace-3.yaml` should look like the following:
+
+kind: Namespace
+
+apiVersion: v1
+
+metadata:
+
+  name: namespace-3  
+
+  annotations:
+
+    generated-by: yaml
+
+
+
+Now let's create the namespace:
+
+$ kubectl create -f namespace-3.yaml
+
+
+
+You should see the following output:
+
+namespace/namespace-3 created
+
+
+
+We are creating a new namespace this one we do not have a label to but we added the annotation denoting how this namespace was generated.
+
+To see what that looks like we can describe the object in Kubernetes:
+
+$ kubectl describe namespaces namespace-3
+
+
+
+You should see the following output:
+
+Name:         namespace-3
+
+Labels:       kubernetes.io/metadata.name=namespace-3
+
+Annotations:  generated-by: yaml
+
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+
+
+Annotating an Existing Namespace
+
+We can also annotate existing object in Kubernetes. To do so we can run the following command:
+
+$ kubectl annotate --overwrite namespace namespace-2 generated-by=system
+
+
+
+You should see the following output:
+
+namespace/namespace-2 annotated
+
+
+
+To see what that looks like we can describe the object in Kubernetes:
+
+$ kubectl describe namespaces namespace-2
+
+
+
+You should see the following output:
+
+Name:         namespace-2
+
+Labels:       kubernetes.io/metadata.name=namespace-2
+
+Annotations:  generated-by: system
+
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.

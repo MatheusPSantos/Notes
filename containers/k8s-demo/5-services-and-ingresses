@@ -1,0 +1,197 @@
+Workflow
+Create a Simple App
+To do this we are going to create a directory for our app and call that hello-world. Within this directory we need to create a file called Dockerfile and another file called index.html.
+
+In you favorite text editor open Dockerfile and add the following:
+
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+
+Save the file and close it.
+
+Then open the index.html file and add the following:
+
+<h1>Hello World!!!</h1>
+
+
+Save the file and close it.
+
+Now let's build this:
+
+nerdctl --namespace k8s.io build --tag hello-world:latest .
+
+
+The output should look something like this:
+
+[+] Building 11.6s (7/7)
+[+] Building 11.8s (7/7) FINISHED
+ => [internal] load build definition from Dockerfile 0.0s
+ => => transferring dockerfile: 83B 0.0s
+ => [internal] load .dockerignore 0.0s
+ => => transferring context: 2B 0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine 7.0s
+ => [internal] load build context 0.0s
+ => => transferring context: 112B 0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:c94a22b036afa972426b82d5b0a49c959786005b4f6f81ac7467ca5538d0158f 2.6s
+ => => resolve docker.io/library/nginx:alpine@sha256:c94a22b036afa972426b82d5b0a49c959786005b4f6f81ac7467ca5538d0158f 0.1s
+ => => sha256:1f21f983520d9a440d410ea62eb0bda61a2b50dd79878071181b56b82efa9ef3 1.40kB / 1.40kB 0.1s
+ => => sha256:c23b4f8cf279507bb1dd3d6eb2d15ca84fac9eac215ab5b529aa8b5a060294c8 11.61MB / 11.61MB 1.7s
+ => => sha256:3e1e579c95fece6bbe0cb9c8c2949512a3f8caaf9dbe6219dc6495abb9902040 956B / 956B 0.2s
+ => => sha256:547a97583f72a32903ca1357d48fa302e91e8f83ffa18e0c40fd87adb5c06025 773B / 773B 0.1s
+ => => sha256:59b9d2200e632e457f800814693b3a01adf09a244c38ebe8d3beef5c476c4c55 626B / 626B 0.1s
+ => => sha256:2ce963c369bc5690378d31c51dc575c7035f6adfcc1e286051b5a5d9a7b0cc5c 1.80MB / 1.80MB 0.5s
+ => => sha256:f56be85fc22e46face30e2c3de3f7fe7c15f8fd7c4e5add29d7f64b87abdaa09 3.37MB / 3.37MB 1.0s
+ => => extracting sha256:f56be85fc22e46face30e2c3de3f7fe7c15f8fd7c4e5add29d7f64b87abdaa09 0.2s
+ => => extracting sha256:2ce963c369bc5690378d31c51dc575c7035f6adfcc1e286051b5a5d9a7b0cc5c 0.2s
+ => => extracting sha256:59b9d2200e632e457f800814693b3a01adf09a244c38ebe8d3beef5c476c4c55 0.0s
+ => => extracting sha256:3e1e579c95fece6bbe0cb9c8c2949512a3f8caaf9dbe6219dc6495abb9902040 0.0s
+ => => extracting sha256:547a97583f72a32903ca1357d48fa302e91e8f83ffa18e0c40fd87adb5c06025 0.0s
+ => => extracting sha256:1f21f983520d9a440d410ea62eb0bda61a2b50dd79878071181b56b82efa9ef3 0.0s
+ => => extracting sha256:c23b4f8cf279507bb1dd3d6eb2d15ca84fac9eac215ab5b529aa8b5a060294c8 0.5s
+ => [2/2] COPY . /usr/share/nginx/html 0.1s
+ => exporting to docker image format 1.7s
+ => => exporting layers 0.1s
+ => => exporting manifest sha256:3999c56ece1f3d5f395defb93aaddf9ed697a3fd8c3c71d0c0bbd191e77d3971 0.0s
+ => => exporting config sha256:742ea8323b6c51769f41bb6e585303fe7b5df78ea58ba41d7dbec01d129b5cac  0.0s
+ => => sending tarball 1.5s
+Loaded image: docker.io/library/hello-world:latest
+
+
+Deploying an App
+In your favorite text editor create a file and call it deployment.yaml. We are going to build out a Deployment and need to add a few of the based fields:
+
+apiVersion: apps/v1
+kind: Deployment
+For the metadata subsection we need to add a name and set it to hello-world-deployment. Now we can set the namespace to namespace-1 and add a labels subsection with one label type set to webapp. This section should look like this:
+
+metadata:
+  name: hello-world-deployment
+  namespace: namespace-1
+  labels:
+    type: webapp
+The spec subsection is going to look like we did before. We are going to set the replicas to 1. The selector needs a matchLabels with the type set to webapp. The template subsection will have metadata with labels and again with the type set to webapp.
+
+The spec section that is for containers should look like this below:
+
+spec:
+  containers:
+  - name: webapp
+  image: hello-world:latest
+  ports:
+  - containerPort: 80
+  resources:
+    requests:
+      memory: "32Mi"
+      cpu: "200m"
+    limits:
+      memory: "64Mi"
+      cpu: "300m"
+Note: the image is set to hello-world:latest, this is the image we just created.
+
+The final file should look like this:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+  namespace: namespace-1
+  labels:
+    type: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: webapp
+  template:
+    metadata:
+      labels:
+        type: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: hello-world:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "200m"
+          limits:
+            memory: "64Mi"
+            cpu: "300m"
+Now we can deploy this Deployment:
+
+kubectl create -f deployment.yaml 
+With the output looking something like this:
+
+deployment.apps/hello-world-deployment created
+There are four Service Types within Kubernetes,
+
+ClusterIP,
+NodePort,
+LoadBalancer, and
+externalName
+When you do not specify which type of service you want to expose, by default, Kubernetes uses the ClusterIP service type, to expose your deployment.
+
+We will use the declarative method of exposing our deployment by executing the below command:
+
+kubectl expose deployment hello-world-deployment --name hello-world-service --port=8080 --target-port=80 -n namespace-1
+Here, since we've not specified the type of Service, Kubernetes will choose the ClusterIP Service Type.
+
+If the command is successful, you should see the output below,
+
+service/hello-world-service exposed
+You can check the details of the service you just created by executing the command,
+
+kubectl describe service hello-world-service -n namespace-1
+This should display the output on your terminal that is similar to the below:
+
+Name:              hello-world-service
+Namespace:         namespace-1
+Labels:            <none>
+Annotations:       <none>
+Selector:          type=webapp
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.43.122.171
+IPs:               10.43.122.171
+Port:              <unset>  80/TCP
+TargetPort:        80/TCP
+Endpoints:         10.42.0.49:80
+Session Affinity:  None
+Events:            <none>
+Note: It's important to note here that the selector for the pods mentioned in the deployment.yaml file and services.yaml file should match.
+
+Now, what if we wanted this service to be accessible to us externally?
+
+Using one of the other service types is a great option.
+
+However, they also necessitate you remembering the hostname & portnumber every single time you access the service.
+
+Kubernetes offers you Ingress controllers, so that you can safely expose it to your customer, without them (or you) having to remember the port number the service was exposed on.
+
+For this lab, we're first going to setup an NGINX Ingress Controller by executing the below command,
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.2/deploy/static/provider/cloud/deploy.yaml
+Wait for the ingress pods to come up and running.
+
+kubectl get pods --namespace=ingress-nginx
+We will now create an ingress resource declaratively that maps to <your_hostname>.127.0.0.1.sslip.io
+
+kubectl create ingress hello-world-ingress --class=nginx --rule="<your_hostname>.127.0.0.1.sslip.io/*=hello-world-service:80" -n namespace-1
+This can also be created using a yaml file as below,
+
+kubectl apply -f ingress.yaml -n namespace-1
+You should see the output,
+
+ingress.networking.k8s.io/demo-localhost created
+Forward a local port to the ingress controller.
+
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8081:80
+You should now see Hello World!!! displayed on your browser when you access the link, http://<your_hostname>.127.0.0.1.sslip.io:8081
+
+
+Mark Incomplete
