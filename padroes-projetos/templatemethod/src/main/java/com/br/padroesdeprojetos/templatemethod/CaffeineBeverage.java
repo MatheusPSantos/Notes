@@ -19,4 +19,6 @@ public abstract class CaffeineBeverage {
     void pourInCup() {
         System.out.println("Pouring into cup");
     }
+
+    void hook() {} // hook method
 }
