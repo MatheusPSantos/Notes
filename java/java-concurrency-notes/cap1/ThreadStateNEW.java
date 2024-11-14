@@ -1,3 +1,4 @@
+package cap1;
 public class ThreadStateNEW {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("# NEW -------");

@@ -1,3 +1,4 @@
+package cap1;
 public class ThreadStateRUNNABLE {
     public static void main(String[] args) {
         System.out.println("# Runnable --------");

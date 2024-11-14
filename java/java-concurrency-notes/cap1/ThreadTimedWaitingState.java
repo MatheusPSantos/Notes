@@ -1,3 +1,4 @@
+package cap1;
 public class ThreadTimedWaitingState {
   public static void main(String[] args) throws InterruptedException {
     DemoTimeingRunnable runnable = new DemoTimeingRunnable();

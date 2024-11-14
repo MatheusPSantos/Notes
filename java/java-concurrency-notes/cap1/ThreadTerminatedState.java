@@ -1,3 +1,4 @@
+package cap1;
 class ThreadTerminatedState implements Runnable {
   public static void main(String[] args) throws InterruptedException {
     Thread t = new Thread();

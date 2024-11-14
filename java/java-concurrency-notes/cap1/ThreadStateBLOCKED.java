@@ -1,3 +1,4 @@
+package cap1;
 public class ThreadStateBLOCKED {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("# BLOCKED ---------");

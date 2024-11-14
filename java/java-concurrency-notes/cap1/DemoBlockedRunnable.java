@@ -1,3 +1,4 @@
+package cap1;
 public class DemoBlockedRunnable implements Runnable {
     @Override
     public void run() {
