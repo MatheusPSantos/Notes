@@ -52,10 +52,8 @@ func update(p *parser, r result) {
 		return
 	}
 
-	domain, visits := r.domain, r.visits
-
 	if _, ok := p.sum[r.domain]; !ok {
-		p.domains = append(p.domains, domain)
+		p.domains = append(p.domains, r.domain)
 	}
 
 	p.total += r.visits

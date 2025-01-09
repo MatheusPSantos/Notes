@@ -58,6 +58,14 @@ func main() {
 	fmt.Println(a)
 	fmt.Println(b)
 	fmt.Println(*a, "\t", *b)
+
+	m := make(map[string]int)
+	m["a"] = 1
+	fmt.Print(m)
+
+	t := []int{1,2,3,4,5}
+	t = nil
+	fmt.Println(len(t), cap(t), t)
 }
 
 type pa struct {
