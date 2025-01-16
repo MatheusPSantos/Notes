@@ -2,25 +2,22 @@ package main
 
 import (
 	"context"
+	"github.com/matheuspsantos/notes/go/building-microservices-with-go/product-api/handlers"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-
-	"github.com/matheuspsantos/notes/go/building-microservices-with-go/working/handlers"
 )
 
 func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 
-	hh := handlers.NewHello(l)
-	gb := handlers.NewGoodbye(l)
+	ph := handlers.NewProducts(l)
 
 	sm := http.NewServeMux()
-	sm.Handle("/", hh)
-	sm.Handle("/goodbye", gb)
-
+	sm.Handle("/", ph)
+	
 	s := &http.Server{
 		Addr:         ":9090",
 		Handler:      sm,
