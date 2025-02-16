@@ -1,3 +1,17 @@
+// Package classification of Product API
+//
+// # Documentation for Product API
+//
+// Schemes: http
+// BasePath: /
+// Version: 1.0.0
+//
+// Consumes:
+// - application/json
+//
+// Produces:
+// - application/json
+// swagger:meta
 package handlers
 
 import (
@@ -11,28 +25,29 @@ import (
 	"github.com/matheuspsantos/notes/go/building-microservices-with-go/product-api/data"
 )
 
+// swagger:response noContent
+type productsNoContent struct {
+}
+type productsResponseWrapper struct {
+	Body []data.Product
+}
+
+// swagger:parameters	deleteProduct
+type productIDParameterWrapper struct {
+	// The id of the product to delete from database
+	// in: path
+	// required: true
+	ID int `json:"id"`
+}
+
+// Products is a http.Handler
 type Products struct {
 	l *log.Logger
 }
 
+// NewProducts crate a produts handler with the given logger
 func NewProducts(l *log.Logger) *Products {
 	return &Products{l}
-}
-
-func (p *Products) GetProducts(rw http.ResponseWriter, r *http.Request) {
-	lp := data.GetProducts()
-	err := lp.ToJSON(rw)
-	if err != nil {
-		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
-	}
-}
-
-func (p *Products) AddProduct(rw http.ResponseWriter, r *http.Request) {
-	p.l.Print("Handle POST product")
-	prod := data.Product{}
-	prod = r.Context().Value(KeyProduct{}).(data.Product)
-	p.l.Printf("Product: %#v", prod)
-	data.AddProduct(&prod)
 }
 
 func (p *Products) UpdateProducts(rw http.ResponseWriter, r *http.Request) {
