@@ -3,6 +3,7 @@ package br.com.matheuspsantos.springbatchudemy;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemWriter;
@@ -10,7 +11,6 @@ import org.springframework.batch.item.function.FunctionItemProcessor;
 import org.springframework.batch.item.support.IteratorItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.Arrays;
@@ -18,16 +18,22 @@ import java.util.List;
 
 @Configuration
 public class ImprimeParImparBatchConfig {
+    private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
-    @Bean
-    public Job imprimeParOuImparJob(JobRepository jobRepository, Step imprimeParOuImparStep) {
-        return new JobBuilder("imprimeParOuImparJob", jobRepository)
-                .start(imprimeParOuImparStep)
-                .build();
+    public ImprimeParImparBatchConfig(JobRepository jobRepository, PlatformTransactionManager platformTransactionManager) {
+        this.jobRepository = jobRepository;
+        this.platformTransactionManager = platformTransactionManager;
     }
 
     @Bean
-    public Step imprimeParOuImparStep(JobRepository jobRepository, PlatformTransactionManager platformTransactionManager) {
+    public Job imprimeParOuImparJob() {
+        return new JobBuilder("imprimeParOuImparJob", jobRepository)
+                .start(imprimeParOuImparStep())
+                .build();
+    }
+
+    public Step imprimeParOuImparStep() {
         return new StepBuilder("imprimeParOuImparStep", jobRepository)
                 .<Integer, String>chunk(1, platformTransactionManager)
                 .reader(contaAteDezReader())
@@ -42,10 +48,12 @@ public class ImprimeParImparBatchConfig {
     }
 
     public FunctionItemProcessor<Integer, String> parOuImparProcessor() {
-        return new FunctionItemProcessor<Integer, String>((item) -> item % 2 == 0 ? String.format("Item %s é Par", item) : String.format("Item %s é Ímpar", item));
+        return new FunctionItemProcessor<Integer, String>(
+                (item) -> item % 2 == 0 ? String.format("Item %s é Par", item) : String.format("Item %s é Ímpar", item)
+        );
     }
 
     public ItemWriter<String> imprimeWriter() {
-        return items -> items.forEach(System.out::println);
+        return itens -> itens.forEach(System.out::println);
     }
 }
