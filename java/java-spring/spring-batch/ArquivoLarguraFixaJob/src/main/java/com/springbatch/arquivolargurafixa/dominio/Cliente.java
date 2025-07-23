@@ -1,50 +1,63 @@
 package com.springbatch.arquivolargurafixa.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
-	private String nome;
-	private String sobrenome;
-	private String idade;
-	private String email;
+    private String nome;
+    private String sobrenome;
+    private String idade;
+    private String email;
+    private List<Transacao> transacoes = new ArrayList<>();
 
-	public String getNome() {
-		return nome;
-	}
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setTransacoes(List<Transacao> transacoes) {
+        this.transacoes = transacoes;
+    }
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getIdade() {
-		return idade;
-	}
+    public String getSobrenome() {
+        return sobrenome;
+    }
 
-	public void setIdade(String idade) {
-		this.idade = idade;
-	}
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getIdade() {
+        return idade;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	@Override
-	public String toString() {
-		return "Cliente{" +
-	                "nome='" + nome + "'" +
-	                ", sobrenome ='" + sobrenome + "'" +
-	                ", idade='" + idade + "'" +
-	                ", email='" + email + "'" +
-	                '}';
-	}
+    public void setIdade(String idade) {
+        this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + "'" +
+                ", sobrenome ='" + sobrenome + "'" +
+                ", idade='" + idade + "'" +
+                ", email='" + email + "'" +
+                (transacoes.isEmpty() ? "" : ", transacoes=" + transacoes) +
+                '}';
+    }
 }

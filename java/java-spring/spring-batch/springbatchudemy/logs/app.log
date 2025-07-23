@@ -1,0 +1,9 @@
+2025-04-21 10:13:18,116 INFO b.c.m.s.SpringbatchudemyApplication [main] Starting SpringbatchudemyApplication using Java 17.0.13 with PID 24817 (/Users/matheussantos/Desktop/Estudos/Notes/java/java-spring/spring-batch/springbatchudemy/target/classes started by matheussantos in /Users/matheussantos/Desktop/Estudos/Notes/java/java-spring/spring-batch/springbatchudemy)
+2025-04-21 10:13:18,117 INFO b.c.m.s.SpringbatchudemyApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-04-21 10:13:18,344 INFO o.s.c.a.ConfigurationClassEnhancer [main] @Bean method PropsConfig.config is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2025-04-21 10:13:18,406 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-04-21 10:13:18,716 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b705be7
+2025-04-21 10:13:18,716 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-04-21 10:13:18,907 INFO b.c.m.s.SpringbatchudemyApplication [main] Started SpringbatchudemyApplication in 1.007 seconds (process running for 1.604)
+2025-04-21 10:13:18,996 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Shutdown initiated...
+2025-04-21 10:13:19,043 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Shutdown completed.
