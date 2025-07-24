@@ -1,5 +1,7 @@
 package br.com.matheuspsantos
 
+import kotlin.properties.Delegates
+
 class Person {
     var name: String = ""
     var age: Int = -1

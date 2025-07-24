@@ -1,11 +1,23 @@
 package br.com.matheuspsantos
 
+import kotlin.reflect.KProperty
+
 class Average {
     public operator fun invoke(vararg values: Double): Double {
         var sum = 0.0
         for (x in values)
             sum += x
         return sum / values.size
+    }
+}
+
+class Delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "${thisRef}, thank you for delegating ''${property.name} to me!"
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name}' in $thisRef.")
     }
 }
 
@@ -45,4 +57,17 @@ fun main() {
 
     var h = Human("Jesus", 22)
     println("my name is ${h.name} and I am ${h.age} years old")
+
+    var h2 = Human("Jesus", 22)
+    println("my name is ${h.name} and I am ${h.age} years old")
+
+    var h3 = h.copy() // so pode usar .copy pois Human é data class
+    println(h == h3)
+
+    var p = Person()
+    p.name = "Mary"
+    val _s = p.name
+
+
 }
+
