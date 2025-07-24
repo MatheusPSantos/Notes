@@ -68,6 +68,10 @@ fun main() {
     p.name = "Mary"
     val _s = p.name
 
+    // var pf = PointFactory() // --> sendo uma class e nao um object
+    // var point = pf.NewPolarPoint(3.0, Math.PI / 2)
 
+    var point = PointFactory.NewPolarPoint(3.9, Math.PI/2) // PointFactory definida como object -> vira singleton
+    println(point.toString())
 }
 
