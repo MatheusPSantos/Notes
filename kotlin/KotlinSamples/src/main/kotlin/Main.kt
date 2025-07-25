@@ -73,5 +73,27 @@ fun main() {
 
     var point = PointFactory.NewPolarPoint(3.9, Math.PI/2) // PointFactory definida como object -> vira singleton
     println(point.toString())
+
+    var simplePoint = PointV2(1.0, 2.0)
+    //var factoryPoint = PointV2.Factory.createPolar(3.0, Math.PI/2)
+    var factoryPointV2 = PointV2.createPolar(3.0, Math.PI/2)
+
+    var create = PointV2.Companion.create()
+
+    var john = PersonV2("John")
+    john.talk()
+
+    var boos = Manager("Alfred", listOf(john))
+    boos.talk()
+
+
+    var c:ISomething = Concrete()
+    c.doThings()
+    println(c.name)
+
+    val mfd = MultiFunctionDevice()
+    mfd.print()
+    mfd.scan()
 }
+
 
