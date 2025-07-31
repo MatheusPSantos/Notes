@@ -94,6 +94,45 @@ fun main() {
     val mfd = MultiFunctionDevice()
     mfd.print()
     mfd.scan()
+
+    val gen = generateSequence(1, { it + 2})
+    val numbers = gen.take(10)
+    println(numbers.toList())
+
+    // quantifiers
+    val numbers1: Sequence<Int> = arrayOf(1,2,3,4,5, -9).asSequence()
+
+    println("all numbers > 0? ${numbers1.all{ it > 0}}")
+    println("all numbers are odd? ${numbers.all{it%2 == 1}}")
+    println("cotains number 5? ${numbers.contains(5)}")
+    println("total number of elements ${numbers.count()}")
+    println("total number of elements greater than 3 ${numbers.count { it > 3 }}")
+
+    val seq = generateSequence(1, {it + 1})
+    val numbers2: Sequence<Int> = seq.take(4)
+    val squares = numbers2.map { it * it}
+    println(numbers2.toList())
+    println(squares.toList())
+
+    val sentences = "This is a nice setence"
+    val wordsLengths = sentences.split(' ').map{ it.length }
+    println(sentences)
+    println(wordsLengths)
+
+    val wordsLengths2 = sentences.split(' ').map{
+        object {
+            val length = it.length
+            val value = it
+        }
+    }
+
+    for (wl in wordsLengths2) {
+        println("'${wl.value}' has length ${wl.length}")
+    }
+
+    val wordLengthsPairs = sentences.split(' ')
+        .associate { it.to(it.length)}
+    for (wl in wordLengthsPairs) {
+        println(wl)
+    }
 }
-
-
