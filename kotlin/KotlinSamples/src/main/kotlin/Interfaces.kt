@@ -13,6 +13,6 @@ interface ISomething {
 
 class Concrete: ISomething {
     override val age: Int = 12
-    override val foo: String = "abc"
+    override val foo: String = "abcq"
     override fun doThings() {}
 }
